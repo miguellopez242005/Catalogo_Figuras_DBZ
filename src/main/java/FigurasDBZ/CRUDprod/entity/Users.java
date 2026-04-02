@@ -1,17 +1,23 @@
+package FigurasDBZ.CRUDprod.entity;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
 @Entity
 @Table(name = "users")
 @Data
-public class User {
+public class Users {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user")
     private Integer idUser;
 
     private String name;
     private String email;
     private String password;
     private String phone;
-    @ManyToOne 
+
+    @ManyToOne
     @JoinColumn(name = "id_rol")
     private Role role;
 }
