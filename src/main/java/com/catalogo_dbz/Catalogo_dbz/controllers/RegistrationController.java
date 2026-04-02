@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.catalogo_dbz.Catalogo_dbz.repository.UserRepository;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+import com.catalogo_dbz.Catalogo_dbz.dto.UserDTO;
+import com.catalogo_dbz.Catalogo_dbz.service.UserService;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -14,13 +18,18 @@ public class RegistrationController {
 
 
     @Autowired
-    private UsuarioService usuarioService;
+    private UserService usuarioService;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
         try {
             User nuevoUsuario = usuarioService.registrar(user);
-            return new ResponseEntity<>(nuevoUsuario, HttpStatus.CREATED);
+            UserDTO dto = new UserDTO();
+            dto.setIdUser(nuevoUsuario.getIdUser());
+            dto.setName(nuevoUsuario.getName());
+            dto.setEmail(nuevoUsuario.getEmail());
+            dto.setPhone(nuevoUsuario.getPhone());
+            return new ResponseEntity<>(dto, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>("Error en el registro: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -2,6 +2,9 @@ package com.catalogo_dbz.Catalogo_dbz;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.catalogo_dbz.Catalogo_dbz.repository.UserRepository;
+import com.catalogo_dbz.Catalogo_dbz.entity.User;
 
 @SpringBootApplication
 public class CatalogoDbzApplication {
