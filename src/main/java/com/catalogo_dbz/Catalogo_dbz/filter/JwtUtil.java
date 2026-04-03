@@ -1,4 +1,4 @@
-package FigurasDBZ.CRUDprod.filter;
+package com.catalogo_dbz.Catalogo_dbz.filter;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -60,4 +60,21 @@ public class JwtUtil {
             Base64.getEncoder().encodeToString(secret.getBytes())
         ));
     }
+    
+    public String refreshToken(String token) {
+    Claims claims;
+    try {
+        claims = getClaims(token);
+    } catch (io.jsonwebtoken.ExpiredJwtException e) {
+        // Si expiró recuperamos los datos igual
+        claims = e.getClaims();
+    } catch (io.jsonwebtoken.JwtException e) {
+        throw new RuntimeException("Token inválido: " + e.getMessage());
+    }
+
+    return generateToken(
+        claims.getSubject(),
+        claims.get("role", String.class)
+    );
+}
 }

@@ -1,10 +1,11 @@
-package FigurasDBZ.CRUDprod.services;
-import FigurasDBZ.CRUDprod.dto.ProductRequestDto;
-import FigurasDBZ.CRUDprod.dto.ProductResponseDto;
-import FigurasDBZ.CRUDprod.entity.Products;
-import FigurasDBZ.CRUDprod.repository.ProductRepository;
+package com.catalogo_dbz.Catalogo_dbz.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import com.catalogo_dbz.Catalogo_dbz.dto.ProductRequestDto;
+import com.catalogo_dbz.Catalogo_dbz.dto.ProductResponseDto;
+import com.catalogo_dbz.Catalogo_dbz.entity.Products;
+import com.catalogo_dbz.Catalogo_dbz.repository.ProductRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;

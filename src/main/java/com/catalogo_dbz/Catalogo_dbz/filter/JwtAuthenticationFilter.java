@@ -11,7 +11,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import com.catalogo_dbz.Catalogo_dbz.entity.User;
-import FigurasDBZ.CRUDprod.filter.JwtUtil;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 

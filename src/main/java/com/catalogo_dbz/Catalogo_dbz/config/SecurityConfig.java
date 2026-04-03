@@ -10,8 +10,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.catalogo_dbz.Catalogo_dbz.filter.JwtAuthenticationFilter;
+import com.catalogo_dbz.Catalogo_dbz.filter.JwtUtil;
+
 import org.springframework.security.config.http.SessionCreationPolicy;
-import FigurasDBZ.CRUDprod.filter.JwtUtil;
 
 @Configuration
 @EnableWebSecurity
@@ -33,6 +34,8 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/register").permitAll()
+                .requestMatchers("/api/auth/refresh").permitAll()
+                .requestMatchers("/api/products/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
             .addFilter(jwtFilter)
@@ -44,4 +47,6 @@ public class SecurityConfig {
     public AuthenticationManager authManager(HttpSecurity http) throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class).build();
     }
+
+    
 }

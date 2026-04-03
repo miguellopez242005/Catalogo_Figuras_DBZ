@@ -1,4 +1,4 @@
-package FigurasDBZ.CRUDprod.entity;
+package com.catalogo_dbz.Catalogo_dbz.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

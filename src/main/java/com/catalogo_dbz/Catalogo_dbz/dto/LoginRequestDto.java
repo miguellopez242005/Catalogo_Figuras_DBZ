@@ -1,4 +1,4 @@
-package FigurasDBZ.CRUDprod.dto;
+package com.catalogo_dbz.Catalogo_dbz.dto;
 
 import lombok.Data;
 

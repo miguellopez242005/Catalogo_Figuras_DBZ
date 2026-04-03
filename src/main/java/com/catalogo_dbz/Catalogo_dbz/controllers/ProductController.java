@@ -1,13 +1,14 @@
-package FigurasDBZ.CRUDprod.controller;
+package com.catalogo_dbz.Catalogo_dbz.controllers;
 
-import FigurasDBZ.CRUDprod.dto.ProductRequestDto;
-import FigurasDBZ.CRUDprod.dto.ProductResponseDto;
-import FigurasDBZ.CRUDprod.services.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.catalogo_dbz.Catalogo_dbz.dto.ProductRequestDto;
+import com.catalogo_dbz.Catalogo_dbz.dto.ProductResponseDto;
+import com.catalogo_dbz.Catalogo_dbz.service.ProductService;
 
 import java.util.List;
 
@@ -31,12 +32,12 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<ProductResponseDto> create(@Valid @RequestBody ProductRequestDto request) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(productService.create(request));
+               .body(productService.create(request));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ProductResponseDto> update(@PathVariable Integer id,
-                                                   @Valid @RequestBody ProductRequestDto request) {
+          @Valid @RequestBody ProductRequestDto request) {
         return ResponseEntity.ok(productService.update(id, request));
     }
 
