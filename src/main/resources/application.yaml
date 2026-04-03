@@ -1,10 +1,9 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/figurasdbz
-    username: root
-    password: 
+    username: tu_usuario
+    password: tu_password
     driver-class-name: com.mysql.cj.jdbc.Driver
-
   jpa:
     hibernate:
       ddl-auto: update
@@ -12,7 +11,3 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
-
-jwt:
-  secret: /JxHnNu+6ZjO4yupZQhN/SSMUre87HB5CEfG21lnx/U=
-  expiration: 86400000
