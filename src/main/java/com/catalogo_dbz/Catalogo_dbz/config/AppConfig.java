@@ -1,4 +1,4 @@
-package FigurasDBZ.CRUDprod.config;
+package com.catalogo_dbz.Catalogo_dbz.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

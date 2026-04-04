@@ -1,4 +1,4 @@
-package FigurasDBZ.CRUDprod.dto;
+package com.catalogo_dbz.Catalogo_dbz.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

@@ -1,6 +1,7 @@
-package FigurasDBZ.CRUDprod.filter;
+package com.catalogo_dbz.Catalogo_dbz.filter;
 
-import FigurasDBZ.CRUDprod.services.UserDetailsServiceImpl;
+import com.catalogo_dbz.Catalogo_dbz.service.UserDetailsServiceImpl;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
