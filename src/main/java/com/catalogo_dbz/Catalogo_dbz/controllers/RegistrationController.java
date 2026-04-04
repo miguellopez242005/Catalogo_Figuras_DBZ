@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
 import com.catalogo_dbz.Catalogo_dbz.dto.UserDTO;
-import com.catalogo_dbz.Catalogo_dbz.service.UserService;
+import com.catalogo_dbz.Catalogo_dbz.service.AuthService;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -18,17 +18,12 @@ public class RegistrationController {
 
 
     @Autowired
-    private UserService usuarioService;
+    private AuthService usuarioService;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
         try {
-            User nuevoUsuario = usuarioService.registrar(user);
-            UserDTO dto = new UserDTO();
-            dto.setIdUser(nuevoUsuario.getIdUser());
-            dto.setName(nuevoUsuario.getName());
-            dto.setEmail(nuevoUsuario.getEmail());
-            dto.setPhone(nuevoUsuario.getPhone());
+            UserDTO dto = usuarioService.register(user);
             return new ResponseEntity<>(dto, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>("Error en el registro: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -38,15 +33,9 @@ public class RegistrationController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User loginData) {
         try {
-            User user = usuarioService.login(loginData.getEmail(), loginData.getPassword());
+            UserDTO dto = usuarioService.login(loginData.getEmail(), loginData.getPassword());
             
-            if (user != null) {
-                UserDTO dto = new UserDTO();
-                dto.setIdUser(user.getIdUser());
-                dto.setName(user.getName());
-                dto.setEmail(user.getEmail());
-                dto.setPhone(user.getPhone());
-                
+            if (dto != null) {                
                 return ResponseEntity.ok(dto);
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");

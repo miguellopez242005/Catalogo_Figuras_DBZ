@@ -1,10 +1,5 @@
 package com.catalogo_dbz.Catalogo_dbz.entity;
 import jakarta.persistence.*;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
@@ -16,4 +11,7 @@ public class Role {
     @Column(name = "id_rol")
     private Integer idRol;
     private String rol;
+    public void setRol(String rol) {
+        this.rol = (rol != null) ? rol.toUpperCase().trim() : null;
+    }
 }
