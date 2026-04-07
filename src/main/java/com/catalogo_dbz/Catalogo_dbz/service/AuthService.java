@@ -66,9 +66,9 @@ public class AuthService {
     }
 
     /**
-     * Este método es para el refresco del token
-     * @param token jwt viejo
-     * @return nuevo token
+
+     * @param token 
+     * @return 
      */
     public RefreshTokenResponseDTO refreshToken(String token) {
         String jwt = jwtUtil.refreshToken(token);
