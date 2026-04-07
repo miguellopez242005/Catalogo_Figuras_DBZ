@@ -7,15 +7,16 @@ import com.catalogo_dbz.Catalogo_dbz.filter.JwtUtil;
 import com.catalogo_dbz.Catalogo_dbz.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager; // IMPORT CRÍTICO
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken; // IMPORT CRÍTICO
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class AuthService {
 
+    private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
@@ -28,52 +29,40 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User nuevoUsuario = userRepository.save(user);
 
-        UserDTO dto = new UserDTO();
-        dto.setIdUser(nuevoUsuario.getIdUser());
-        dto.setName(nuevoUsuario.getName());
-        dto.setEmail(nuevoUsuario.getEmail());
-        dto.setPhone(nuevoUsuario.getPhone());
-        dto.setRoleName(nuevoUsuario.getRole().getRol());
-        return dto;
+        return mapToDTO(nuevoUsuario, null);
     }
 
     public UserDTO login(String email, String password) {
-        Optional<User> user = userRepository.findByEmail(email);
+        authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(email, password)
+        );
 
-        if (user.isEmpty()) {
-            throw new RuntimeException("Este usuario no se encuentra registrado");
-        }
-
-        User userFound = user.get();
-
-        if (!passwordEncoder.matches(password, userFound.getPassword())) {
-            throw new RuntimeException("Contraseña incorrecta");
-        }
+        User userFound = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         String jwt = jwtUtil.generateToken(
             userFound.getEmail(),
             userFound.getRole().getRol()
         );
 
-        UserDTO dto = new UserDTO();
-        dto.setIdUser(userFound.getIdUser());
-        dto.setName(userFound.getName());
-        dto.setEmail(userFound.getEmail());
-        dto.setPhone(userFound.getPhone());
-        dto.setRoleName(userFound.getRole().getRol());
-        dto.setToken(jwt);
-        return dto;
+        return mapToDTO(userFound, jwt);
     }
 
-    /**
-     * Este método es para el refresco del token
-     * @param token jwt viejo
-     * @return nuevo token
-     */
     public RefreshTokenResponseDTO refreshToken(String token) {
         String jwt = jwtUtil.refreshToken(token);
         RefreshTokenResponseDTO response = new RefreshTokenResponseDTO();
         response.setJwt(jwt);
         return response;
+    }
+
+    private UserDTO mapToDTO(User user, String token) {
+        UserDTO dto = new UserDTO();
+        dto.setIdUser(user.getIdUser());
+        dto.setName(user.getName());
+        dto.setEmail(user.getEmail());
+        dto.setPhone(user.getPhone());
+        dto.setRoleName(user.getRole().getRol());
+        dto.setToken(token);
+        return dto;
     }
 }

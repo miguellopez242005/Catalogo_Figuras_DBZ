@@ -1,18 +1,18 @@
 package com.catalogo_dbz.Catalogo_dbz.service;
-
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.catalogo_dbz.Catalogo_dbz.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import com.catalogo_dbz.Catalogo_dbz.entity.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+
 @Service
+@RequiredArgsConstructor 
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
