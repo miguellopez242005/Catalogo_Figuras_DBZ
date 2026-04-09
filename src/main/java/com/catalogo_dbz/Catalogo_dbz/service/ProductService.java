@@ -49,7 +49,6 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    // ── Mappers ──────────────────────────────────────
     private ProductResponseDto toResponse(Products product) {
         return new ProductResponseDto(
                 product.getIdProduct(),

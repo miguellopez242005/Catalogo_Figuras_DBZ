@@ -44,9 +44,7 @@ public class RoleService {
 
     public RoleDTO save(Role role) {
         try {
-            // Limpieza y formato (Estándar de Spring Security)
             role.setRol(role.getRol().toUpperCase().trim());
-            // Guardamos (MySQL genera el ID autoincremental)
             Role nuevoRol = roleRepository.save(role);
             return mapToDTO(nuevoRol);
         } catch (Exception e) {
