@@ -26,6 +26,8 @@ public class FilterConfig {
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/auth/**").permitAll()
+                .requestMatchers("/products").permitAll()
+                .requestMatchers("/roles").hasRole("ADMIN")
                 .requestMatchers("/products/**").hasRole("ADMIN")
                 .requestMatchers("/cart/**").hasRole("CLIENT")
                 .anyRequest().authenticated()
