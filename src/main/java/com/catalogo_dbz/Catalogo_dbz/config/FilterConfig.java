@@ -27,6 +27,7 @@ public class FilterConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/auth/**").permitAll()
                 .requestMatchers("/products/**").hasRole("ADMIN")
+                .requestMatchers("/cart/**").hasRole("CLIENT")
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

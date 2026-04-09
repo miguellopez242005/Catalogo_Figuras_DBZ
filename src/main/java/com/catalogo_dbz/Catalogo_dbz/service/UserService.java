@@ -60,7 +60,7 @@ public class UserService {
             user.setName(userDetails.getName());
             user.setPhone(userDetails.getPhone());
             user.setEmail(userDetails.getEmail());
-            
+             
             if (userDetails.getPassword() != null && !userDetails.getPassword().isBlank()) {
                 user.setPassword(passwordEncoder.encode(userDetails.getPassword()));
             }
