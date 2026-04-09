@@ -7,8 +7,8 @@ import com.catalogo_dbz.Catalogo_dbz.filter.JwtUtil;
 import com.catalogo_dbz.Catalogo_dbz.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager; // IMPORT CRÍTICO
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken; // IMPORT CRÍTICO
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
