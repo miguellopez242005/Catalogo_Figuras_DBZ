@@ -29,7 +29,7 @@ public class FilterConfig {
                 .requestMatchers("/products").permitAll()
                 .requestMatchers("/roles").hasRole("ADMIN")
                 .requestMatchers("/products/**").hasRole("ADMIN")
-                .requestMatchers("/roles/**").hasRole("ADMIN")
+                .requestMatchers("/cart/**").hasRole("CLIENT")
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
